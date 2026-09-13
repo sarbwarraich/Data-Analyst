@@ -12,6 +12,374 @@ export const CURRICULUM: Subject[] = [
     iconName: 'Database',
     topics: [
       {
+        id: 'data-types-fundamentals',
+        title: 'Start of Course: Data Types (Structured, Semi-Structured, Unstructured)',
+        subjectId: 'data-analytics',
+        category: 'Foundations & Data Engineering',
+        difficulty: 'Foundational',
+        summary:
+          'Data types classify raw data based on its underlying structural format, schema enforcement, and storage organization into Structured (relational tables with rigid schemas), Semi-Structured (polymorphic documents with organizational tags/keys), and Unstructured (native binary/text with no predefined schema) data archetypes.',
+        keyConcepts: [
+          'Definition of Data Types: Classifying raw data based on its underlying structural format, schema enforcement, and storage organization',
+          'Structured Data: High-level organized data that adheres to a rigid, predefined schema and is stored in relational tables with rows and columns (e.g., PostgreSQL, MySQL, Parquet)',
+          'Semi-Structured Data: Data that lacks a strict tabular schema but contains organizational markers, tags, or keys to separate data elements (e.g., JSON, XML, YAML, MongoDB, DynamoDB)',
+          'Unstructured Data: Data that has no predefined structure, schema, or organization, existing in its native raw binary or textual format (e.g., natural language text, audio, video, sensor streams)',
+          'Schema-on-Write vs. Schema-on-Read: Structured RDBMS enforces strict DDL validation on write; semi-structured and unstructured data leverage schema-on-read at query time',
+          'Enterprise Volume Distribution: Unstructured data accounts for ~80%+ of global enterprise volume, while structured data powers core transactional accounting and ACID records',
+          'Transformation & Analytics Paradigms: ETL for structured warehousing vs. ELT & vector embeddings (Cosine similarity, Transformer encodings) for unstructured data lakes',
+          'Indexing & Query Access Mechanisms: B-Tree and Hash indexes for SQL vs. Inverted and document indexes for JSON vs. Vector ANN (HNSW, FAISS) for unstructured media',
+        ],
+        formulas: [
+          {
+            name: 'Shannon Entropy of Data Format',
+            latex: 'H(X) = -\\sum_{i=1}^{n} P(x_i) \\log_2 P(x_i)',
+            explanation: 'Quantifies the average information entropy and compression predictability across structured vs unstructured formats. Structured schemas exhibit low entropy; unstructured raw media exhibits high entropy.',
+            variables: [
+              { symbol: 'P(x_i)', meaning: 'Probability distribution of tokens or byte symbols' },
+              { symbol: 'H(X)', meaning: 'Information entropy in bits' },
+            ],
+          },
+          {
+            name: 'Tabular Sparsity vs Document Density',
+            latex: '\\text{Sparsity} = 1 - \\frac{\\text{Non-Null Entries}}{\\text{Rows} \\times \\text{Columns}}',
+            explanation: 'In tabular structured schemas, polymorphic attributes create extreme null sparsity. Semi-structured document stores eliminate sparsity by only persisting populated keys.',
+            variables: [
+              { symbol: 'Non-Null Entries', meaning: 'Count of actively populated attribute values' },
+              { symbol: 'Rows × Columns', meaning: 'Total matrix grid dimension' },
+            ],
+          },
+          {
+            name: 'Cosine Similarity for Unstructured Embeddings',
+            latex: '\\cos(\\theta) = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{u}\\| \\|\\mathbf{v}\\|}',
+            explanation: 'Standard metric utilized by vector databases to execute semantic search and clustering across unstructured text and audio embeddings.',
+            variables: [
+              { symbol: 'u, v', meaning: 'High-dimensional neural dense embedding vectors' },
+              { symbol: '||u||', meaning: 'Euclidean L2 vector norm' },
+            ],
+          },
+        ],
+        interactiveType: 'data-types',
+        flowchart: {
+          title: 'End-to-End Ingestion, Classification & Transformation Pipeline',
+          description: 'How modern enterprise platforms ingest, audit schemas, route, and transform Structured, Semi-Structured, and Unstructured data',
+          steps: [
+            { id: '1', title: '1. Multi-Modal Ingestion Stream', description: 'Receive incoming payloads: relational database CDC feeds, REST API JSONs, and raw S3 audio/text files.', category: 'input' },
+            { id: '2', title: '2. Schema Audit & Typology Classification', description: 'Inspect payload structure: validate against rigid DDL, detect self-describing tags, or flag binary blob.', category: 'decision' },
+            { id: '3', title: '3. Architectural Storage Routing', description: 'Route structured to Data Warehouses (Snowflake); semi-structured to Document/Lakehouse (MongoDB); unstructured to Object Store (S3).', category: 'process' },
+            { id: '4', title: '4. Schema-on-Write vs. Schema-on-Read', description: 'Enforce ACID DDL constraints on write for SQL; preserve raw JSON for dynamic parsing on read.', category: 'process' },
+            { id: '5', title: '5. Vectorization & Harmonization', description: 'Flatten nested JSON keys, tokenize text corpus, and generate neural embeddings for unstructured media.', category: 'process' },
+            { id: '6', title: '6. Unified Analytical Serving Layer', description: 'Serve clean unified data to SQL reporting dashboards, machine learning models, and real-time LLM RAG pipelines.', category: 'output' },
+          ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Foundational Data Typology: Tabular Structured rows, hierarchical Semi-Structured JSON, and raw Unstructured media.',
+          badge: 'Core Course Foundation',
+          diagramType: 'comparison',
+        },
+        caseStudy: {
+          title: 'Amazon E-Commerce: Harmonizing Structured, Semi-Structured & Unstructured Data',
+          industry: 'Enterprise E-Commerce & Cloud Analytics',
+          companyExample: 'Amazon Consumer Platform & AWS Lake Formation',
+          problem: 'Amazon serves over 300 million active shoppers generating billions of events across three incompatible data archetypes: relational order transactions, dynamic product catalog specifications, and customer review text/audio streams.',
+          solutionWorkflow: [
+            'Structured Data: Stored customer billing, inventory balances, and order ledgers in Aurora PostgreSQL with rigid Schema-on-Write to guarantee ACID consistency.',
+            'Semi-Structured Data: Stored polymorphic product specifications (electronics RAM vs apparel fabric) in DynamoDB JSON documents, leveraging Schema-on-Read flexibility.',
+            'Unstructured Data: Stored product review images, unboxing video clips, and customer voice calls in Amazon S3; extracted 1536-dimensional embeddings with neural language models.',
+            'Data Lakehouse Integration: Unified all three types using AWS Glue and Apache Iceberg, enabling analysts to write standard SQL queries that join structured orders with unstructured review sentiment.',
+          ],
+          metricsUsed: ['Query Execution Latency', 'Catalog Schema Evolution Time (Reduced from 2 weeks to 0 seconds)', 'Product Recommendation Conversion Rate (+29%)'],
+          outcome: 'Eliminated brittle database migrations, enabled real-time product search combining structured price filters with semantic review queries, driving billions in incremental revenue.',
+          keyTakeaway: 'Real-world data analytics never operates solely in pristine SQL spreadsheets. Mastering the transformation of structured, semi-structured, and unstructured data is the #1 prerequisite for all advanced analytics.',
+        },
+        pythonSnippet: {
+          title: 'Multi-Modal Data Processing: Handling All 3 Data Types in Python',
+          code: `import json
+import numpy as np
+import pandas as pd
+
+# ==========================================
+# 1. STRUCTURED DATA: Tabular & Strict Dtypes
+# ==========================================
+structured_df = pd.DataFrame({
+    'order_id': [1001, 1002, 1003],
+    'customer_id': [401, 402, 403],
+    'amount': [129.99, 45.50, 899.00],
+    'timestamp': pd.to_datetime(['2026-09-01', '2026-09-02', '2026-09-03'])
+})
+print("=== STRUCTURED (Strict Schema) ===")
+print(structured_df.dtypes)
+print(structured_df.head(2))
+
+# ==========================================
+# 2. SEMI-STRUCTURED DATA: Nested JSON & Normalization
+# ==========================================
+raw_json_stream = """[
+  {"event": "click", "user": {"id": 401, "tier": "Gold"}, "specs": {"browser": "Chrome", "ram_gb": 16}},
+  {"event": "purchase", "user": {"id": 402, "tier": "Silver"}, "apparel": {"size": "L", "color": "Navy"}}
+]"""
+semi_structured_data = json.loads(raw_json_stream)
+# Schema-on-Read: Flatten hierarchical JSON into a DataFrame
+flattened_df = pd.json_normalize(semi_structured_data)
+print("\\n=== SEMI-STRUCTURED (Schema-on-Read) ===")
+print(flattened_df)
+
+# ==========================================
+# 3. UNSTRUCTURED DATA: Text & Vector Embeddings
+# ==========================================
+text_reviews = [
+    "Battery drains very fast after the 4.2 firmware upgrade.",
+    "Outstanding battery longevity, lasts three full days easily."
+]
+# Simulate dense 4-dimensional neural semantic embeddings
+embeddings = np.array([
+    [0.85, -0.42, 0.12, 0.28],   # Negative battery sentiment vector
+    [-0.78, 0.65, -0.15, -0.10]  # Positive battery sentiment vector
+])
+# Cosine Similarity between the two unstructured text items
+dot_product = np.dot(embeddings[0], embeddings[1])
+norm_product = np.linalg.norm(embeddings[0]) * np.linalg.norm(embeddings[1])
+cosine_sim = dot_product / norm_product
+print("\\n=== UNSTRUCTURED (Vectorized Text Semantic Distance) ===")
+print(f"Cosine Similarity between Reviews: {cosine_sim:.4f}")`,
+          explanation: 'Demonstrates handling all 3 data types in Python: strict tabular schemas with pandas, dynamic JSON normalization with json_normalize, and unstructured text vectorization with cosine distance calculation.',
+        },
+        suggestedPrompts: [
+          'Explain the fundamental difference between Schema-on-Write and Schema-on-Read.',
+          'Why do relational databases struggle when storing polymorphic product catalog data?',
+          'How do vector databases enable quantitative analytics and semantic retrieval on unstructured text and audio?',
+        ],
+        quiz: [
+          {
+            id: 'q-dt-1',
+            question: 'What is the defining characteristic of Structured Data according to the course definition?',
+            options: [
+              'High-level organized data that adheres to a rigid, predefined schema and is stored in relational tables with rows and columns',
+              'Raw continuous audio waveforms stored as uncompressed byte streams',
+              'Dynamic documents with no tags, keys, or organizational markers',
+              'Textual narratives written in colloquial natural language',
+            ],
+            correctIndex: 0,
+            explanation: 'Structured data is characterized by its strict, predefined tabular schema, column data types, and relational organization.',
+          },
+          {
+            id: 'q-dt-2',
+            question: 'Which of the following is classified as Semi-Structured data?',
+            options: [
+              'A PostgreSQL table with integer primary keys and decimal prices',
+              'A JSON document containing nested objects, tags, and polymorphic key-value pairs',
+              'An MP3 audio recording of a customer phone conversation',
+              'A raw 4K video surveillance camera byte stream',
+            ],
+            correctIndex: 1,
+            explanation: 'JSON lacks a strict tabular schema but contains organizational markers, tags, or keys (curly braces and property names) to separate data elements.',
+          },
+          {
+            id: 'q-dt-3',
+            question: 'An enterprise data lake stores patient MRI scan image files and audio transcriptions of doctor consultations. How are these assets classified?',
+            options: [
+              'Structured Data',
+              'Semi-Structured Data',
+              'Unstructured Data',
+              'Relational OLAP Data',
+            ],
+            correctIndex: 2,
+            explanation: 'MRI scans (pixels) and voice audio recordings exist in native raw binary formats without predefined schemas or tags, making them Unstructured data.',
+          },
+          {
+            id: 'q-dt-4',
+            question: 'What is the primary operational advantage of Schema-on-Read used in semi-structured data lakes?',
+            options: [
+              'It eliminates the need for computer storage hardware',
+              'It allows ingesting dynamic and rapidly evolving data without requiring upfront ALTER TABLE database schema migrations',
+              'It guarantees 100% relational referential integrity at the hard disk controller level',
+              'It completely prevents any missing values or null fields',
+            ],
+            correctIndex: 1,
+            explanation: 'Schema-on-Read allows storing heterogeneous raw payloads immediately and parsing only the required fields when querying, avoiding rigid upfront schema migration locks.',
+          },
+        ],
+      },
+      {
+        id: 'intro-data-analytics-outcomes',
+        title: 'Start of Course: What is Data Analytics & Course Outcomes',
+        subjectId: 'data-analytics',
+        category: 'Foundations & Course Orientation',
+        difficulty: 'Foundational',
+        summary:
+          'Comprehensive course launchpad: Definition of Data Analytics, differences across analytics paradigms (Descriptive, Diagnostic, Predictive, Prescriptive), data types & schemas, and the 5 foundational Course Outcomes (CO 1-5).',
+        keyConcepts: [
+          'What is Data Analytics: Converting raw data into verifiable intelligence and algorithmic decision systems',
+          'The 4 Analytics Paradigms: Descriptive (What happened?), Diagnostic (Why?), Predictive (What next?), Prescriptive (What to do?)',
+          'Course Outcome 1 (CO 1): Understand foundational concepts of data analytics, including data types, preprocessing, and statistical analysis',
+          'Course Outcome 2 (CO 2): Apply analytical techniques to extract insights from structured and unstructured data',
+          'Course Outcome 3 (CO 3): Analyze real-world datasets using machine learning and visualization tools',
+          'Course Outcome 4 (CO 4): Evaluate the performance of data models and interpret results for decision-making',
+          'Course Outcome 5 (CO 5): Create end-to-end data analytics pipelines using modern tools and frameworks',
+          'Data Typologies: Structured (Relational/SQL, Parquet), Semi-structured (JSON, XML), Unstructured (Text, Audio, Video, Logs)',
+        ],
+        formulas: [
+          {
+            name: 'Analytics Value Chain Progression',
+            latex: '\\text{Value} = f(\\text{Data Quality}, \\; \\text{Statistical Rigor}, \\; \\text{Model Validation}, \\; \\text{Executive Action})',
+            explanation: 'The mathematical returns of an analytics initiative scale multiplicatively across data quality, statistical validity, and execution.',
+            variables: [
+              { symbol: 'Data Quality', meaning: 'Absence of target leakage, proper imputation, valid schema' },
+              { symbol: 'Statistical Rigor', meaning: 'Hypothesis testing (p-value, alpha, power), proper distribution modeling' },
+              { symbol: 'Model Validation', meaning: 'ROC-AUC, cross-validation, out-of-time evaluation' },
+              { symbol: 'Executive Action', meaning: 'Translation of predictions into bottom-line automated policies' },
+            ],
+          },
+          {
+            name: 'Signal-to-Noise Ratio (SNR) in Analytics',
+            latex: 'SNR = \\frac{\\mu_{\\text{signal}}}{\\sigma_{\\text{noise}}}',
+            explanation: 'Quantifies how much actionable predictive signal exists relative to stochastic background variation.',
+            variables: [
+              { symbol: 'μ_signal', meaning: 'Mean magnitude of true underlying pattern' },
+              { symbol: 'σ_noise', meaning: 'Standard deviation of random measurement error' },
+            ],
+          },
+        ],
+        interactiveType: 'pipeline',
+        flowchart: {
+          title: 'End-to-End Data Analytics Lifecycle & Course Outcomes Mapping',
+          description: 'Step-by-step workflow aligning the 5 Course Outcomes to modern data lifecycle engineering',
+          steps: [
+            { id: '1', title: '1. Problem Framing & Data Typology (CO 1)', description: 'Categorize sources (structured SQL vs unstructured text/logs), define metric objectives, and audit data types.', category: 'input' },
+            { id: '2', title: '2. Preprocessing & Leakage-Free Partitions (CO 1 & CO 5)', description: 'Partition into Train/Validation/Test; fit imputers, scalers, and encoders strictly on Train splits.', category: 'process' },
+            { id: '3', title: '3. Exploratory Data Analysis & Feature Extraction (CO 2)', description: 'Extract insights from structured distributions and unstructured corpus via NLP and statistical tests.', category: 'process' },
+            { id: '4', title: '4. Machine Learning & Forecasting Models (CO 3)', description: 'Train supervised classifiers, decision trees, time series (ARIMA/SARIMA), or clustering algorithms.', category: 'process' },
+            { id: '5', title: '5. Model Evaluation & Threshold Tuning (CO 4)', description: 'Evaluate Confusion Matrix, ROC-AUC, PR-AUC, and tune asymmetric business cost-decision thresholds.', category: 'decision' },
+            { id: '6', title: '6. End-to-End Automated Pipeline Deployment (CO 5)', description: 'Package into reproducible Scikit-Learn/Docker pipeline artifacts for real-world automated decision-making.', category: 'output' },
+          ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Course Launchpad: Modern Data Analytics lifecycle from raw telemetry to executive insights.',
+          badge: 'Course Launchpad',
+          diagramType: 'architecture',
+        },
+        caseStudy: {
+          title: 'Building Netflix Personalized Recommendation Intelligence',
+          industry: 'Streaming & Media Analytics',
+          companyExample: 'Netflix Analytics & Algorithms Group',
+          problem: 'Analyzing over 250 million global subscribers generating billions of interaction events daily (structured watch timestamps + unstructured synopsis embeddings).',
+          solutionWorkflow: [
+            'CO 1: Preprocessed user viewing session logs, handling null stops and network dropouts.',
+            'CO 2: Extracted insights from both structured metadata (genre, cast, time of day) and unstructured content summaries.',
+            'CO 3: Trained collaborative filtering matrix factorization and ensemble decision trees.',
+            'CO 4: Evaluated offline NDCG (Normalized Discounted Cumulative Gain) and conducted online randomized A/B tests.',
+            'CO 5: Automated the end-to-end model pipeline with daily continuous retraining and low-latency microservice serving.',
+          ],
+          metricsUsed: ['Take-Rate (% of recommendations watched)', 'Session Playback Abandonment', 'Subscriber Churn Rate'],
+          outcome: 'Over 80% of content watched on Netflix is discovered via algorithmic analytics, saving an estimated $1B annually in customer retention.',
+          keyTakeaway: 'Mastering the 5 Course Outcomes empowers data analysts to connect raw distributed telemetry directly to billion-dollar enterprise decisions.',
+        },
+        pythonSnippet: {
+          title: 'Full End-to-End Starter Pipeline: Ingestion to Metric Evaluation',
+          code: `import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, roc_auc_score
+
+# Step 1 (CO 1): Structured & Unstructured Ingestion Simulation
+np.random.seed(42)
+n_samples = 1000
+data = pd.DataFrame({
+    'tenure_months': np.random.exponential(scale=18, size=n_samples),
+    'monthly_spend': np.random.normal(loc=75, scale=25, size=n_samples),
+    'support_calls': np.random.poisson(lam=2, size=n_samples),
+    'contract_tier': np.random.choice(['Monthly', 'Annual', 'Two-Year'], size=n_samples, p=[0.5, 0.3, 0.2]),
+})
+# Target: Churn binary label (1 = churned)
+churn_logits = 0.05 * data['support_calls'] - 0.04 * data['tenure_months'] + 0.01 * data['monthly_spend']
+churn_prob = 1 / (1 + np.exp(-churn_logits))
+data['churn'] = (np.random.rand(n_samples) < churn_prob).astype(int)
+
+# Step 2 (CO 1 & CO 5): Leak-free Train/Test Partitioning
+X = data.drop(columns=['churn'])
+y = data['churn']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42, stratify=y)
+
+# Step 3 (CO 1 & CO 5): Preprocessing ColumnTransformer
+num_features = ['tenure_months', 'monthly_spend', 'support_calls']
+cat_features = ['contract_tier']
+
+preprocessor = ColumnTransformer(transformers=[
+    ('num', Pipeline([
+        ('imputer', SimpleImputer(strategy='median')),
+        ('scaler', StandardScaler())
+    ]), num_features),
+    ('cat', OneHotEncoder(handle_unknown='ignore'), cat_features)
+])
+
+# Step 4 (CO 3 & CO 5): End-to-End Machine Learning Pipeline
+model_pipeline = Pipeline([
+    ('preprocessor', preprocessor),
+    ('classifier', RandomForestClassifier(n_estimators=100, max_depth=6, random_state=42))
+])
+
+# Step 5 (CO 4): Fit and Evaluate
+model_pipeline.fit(X_train, y_train)
+y_pred_proba = model_pipeline.predict_proba(X_test)[:, 1]
+roc_auc = roc_auc_score(y_test, y_pred_proba)
+
+print(f"=== COURSE OUTCOME 4 VALIDATION ===")
+print(f"Test ROC-AUC Score: {roc_auc:.4f}")
+print("\\nClassification Report:")
+print(classification_report(y_test, (y_pred_proba >= 0.5).astype(int)))`,
+          explanation: 'Demonstrates all 5 Course Outcomes in 60 lines of clean Python: types, leak-free preprocessing, modeling, evaluation, and end-to-end pipeline creation.',
+        },
+        suggestedPrompts: [
+          'Explain how Course Outcomes 1 through 5 map to the day-to-day responsibilities of a Senior Data Analyst.',
+          'What is the difference between structured, semi-structured, and unstructured data in corporate data lakes?',
+          'Why is predictive analytics considered incomplete without prescriptive decision modeling?',
+        ],
+        quiz: [
+          {
+            id: 'q-intro-1',
+            question: 'Which of the following best describes Course Outcome 1 (CO 1)?',
+            options: [
+              'Understand the foundational concepts of data analytics, including data types, preprocessing, and statistical analysis',
+              'Deploy Kubernetes clusters for distributed cloud compute',
+              'Design physical microprocessors for GPU data parallelization',
+              'Manage human resource hiring for data teams',
+            ],
+            correctIndex: 0,
+            explanation: 'CO 1 establishes the core foundation: mastering data types, rigorous preprocessing, and statistical analysis.',
+          },
+          {
+            id: 'q-intro-2',
+            question: 'What is the primary objective of Prescriptive Analytics?',
+            options: [
+              'To summarize past database records into quarterly tables',
+              'To recommend specific optimal actions and operational decisions based on model predictions',
+              'To calculate simple arithmetic means of CSV files',
+              'To store raw logs on tape storage archives',
+            ],
+            correctIndex: 1,
+            explanation: 'Prescriptive analytics answers "What should we do?" by providing actionable policies, optimization rules, and decision recommendations.',
+          },
+          {
+            id: 'q-intro-3',
+            question: 'According to Course Outcome 5 (CO 5), what will students be able to create?',
+            options: [
+              'Static manual spreadsheets with no automation',
+              'End-to-end data analytics pipelines using modern tools and frameworks',
+              'Custom proprietary operating systems',
+              'Front-end mobile video games',
+            ],
+            correctIndex: 1,
+            explanation: 'CO 5 focuses on building scalable, reproducible end-to-end data analytics pipelines utilizing modern data frameworks.',
+          },
+        ],
+      },
+      {
         id: 'data-prep-pipeline',
         title: 'Data Preprocessing & End-to-End Pipelines',
         subjectId: 'data-analytics',
@@ -59,6 +427,12 @@ export const CURRICULUM: Subject[] = [
             { id: '5', title: '5. Scaling & Transformation', description: 'Log1p for skewed distributions, RobustScaler for outlier-prone features.', category: 'process' },
             { id: '6', title: '6. Validated Feature Store', description: 'Export normalized feature tensor ready for training and inference pipelines.', category: 'output' },
           ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Production ETL Pipeline Architecture: Schema ingestion, automated imputation, and leakage-safe transformations.',
+          badge: 'Pipeline Architecture',
+          diagramType: 'architecture',
         },
         caseStudy: {
           title: 'Uber Driver-Rider Matching Data Pipeline',
@@ -162,6 +536,24 @@ preprocessor = ColumnTransformer([
           },
         ],
         interactiveType: 'kmeans',
+        flowchart: {
+          title: 'K-Means Clustering Iterative Convergence Flowchart',
+          description: 'Expectation-Maximization loop from centroid seeding to Voronoi partition convergence',
+          steps: [
+            { id: '1', title: '1. Standardization & Feature Scaling', description: 'Scale features to zero mean and unit variance so high-magnitude columns do not dominate Euclidean distance.', category: 'input' },
+            { id: '2', title: '2. K-Means++ Centroid Seeding', description: 'Sample initial k centroids sequentially with probability proportional to squared distance from nearest chosen center.', category: 'process' },
+            { id: '3', title: '3. Voronoi Partition Assignment (E-Step)', description: 'Assign each data point x to the closest centroid μ_j by minimizing Euclidean norm ||x - μ_j||^2.', category: 'process' },
+            { id: '4', title: '4. Centroid Recalculation (M-Step)', description: 'Recompute each centroid position as the mathematical mean of all points assigned to that cluster.', category: 'process' },
+            { id: '5', title: '5. Convergence Criterion Check', description: 'Check if centroid movements are below threshold epsilon or max iterations reached.', category: 'decision' },
+            { id: '6', title: '6. Optimal Cluster Partition & Silhouette Audit', description: 'Output final cluster labels, calculate Silhouette Coefficient, and evaluate cluster density.', category: 'output' },
+          ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+          caption: 'High-dimensional cluster separation and Voronoi partitioning across user behavioral vectors.',
+          badge: 'Unsupervised Topology',
+          diagramType: 'distribution',
+        },
         caseStudy: {
           title: 'Spotify Listener Behavioral Segmentation',
           industry: 'Music Streaming & Media',
@@ -250,6 +642,24 @@ centroids = final_kmeans.cluster_centers_`,
           },
         ],
         interactiveType: 'hypothesis-testing',
+        flowchart: {
+          title: 'Statistical Hypothesis Testing Selection Flowchart',
+          description: 'Decision path for determining the correct inferential test (ANOVA vs Chi-Square vs t-Test)',
+          steps: [
+            { id: '1', title: '1. Problem Formulation & Hypotheses', description: 'State Null Hypothesis (H0: no difference or independent) and Alternative (H1) with alpha = 0.05.', category: 'input' },
+            { id: '2', title: '2. Variable Type Identification', description: 'Determine whether the target metric is continuous (means) or categorical (proportions).', category: 'decision' },
+            { id: '3', title: '3. Group Count & Normality Verification', description: 'If continuous: check if k >= 3 groups and test normality via Shapiro-Wilk and variance via Levene test.', category: 'decision' },
+            { id: '4', title: '4. Test Statistic Computation', description: 'Calculate ANOVA F-ratio (Between MS / Within MS) or Chi-Square divergence sum of (O-E)^2/E.', category: 'process' },
+            { id: '5', title: '5. P-Value Evaluation vs Alpha', description: 'Compare p-value with significance threshold. If p < alpha, reject H0 (statistically significant).', category: 'decision' },
+            { id: '6', title: '6. Post-Hoc Contrasts & Effect Size', description: 'Run Tukey HSD pairwise contrasts or compute Cramérs V to quantify business effect magnitude.', category: 'output' },
+          ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Variance decomposition and inferential hypothesis testing for multi-group A/B experiment evaluation.',
+          badge: 'Statistical Testing',
+          diagramType: 'distribution',
+        },
         caseStudy: {
           title: 'E-Commerce Checkout Flow A/B/C Multi-Variant Testing',
           industry: 'Retail & E-Commerce',
@@ -352,6 +762,12 @@ print(f"Chi-Square: stat={chi2:.2f}, p={p_chi:.4e}, dof={dof}")`,
             { id: '4', title: '4. Executive Synthesis', description: 'Filter down to 3 narrative charts highlighting actionable business drivers.', category: 'output' },
           ],
         },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Exploratory bivariate correlation distributions and outlier detection surface visual.',
+          badge: 'Exploratory Analytics',
+          diagramType: 'distribution',
+        },
         caseStudy: {
           title: 'Targeting Supply Chain Bottlenecks at Nike Logistics',
           industry: 'Supply Chain & Manufacturing',
@@ -436,6 +852,24 @@ plt.show()`,
             ],
           },
         ],
+        flowchart: {
+          title: 'Enterprise Business Intelligence Architecture Flowchart',
+          description: 'End-to-end data pipeline from transactional ERP/CRM to optimized executive dashboards',
+          steps: [
+            { id: '1', title: '1. Operational Ingestion & CDC', description: 'Capture transactional tables from PostgreSQL, Stripe, and Salesforce via Change Data Capture.', category: 'input' },
+            { id: '2', title: '2. Dimensional Modeling (Star Schema)', description: 'Transform into centralized Fact tables surrounded by conformed Dimensions (Date, Customer, Product).', category: 'process' },
+            { id: '3', title: '3. VertiPaq / Columnar In-Memory Cache', description: 'Stage in BigQuery or Power BI VertiPaq compressed columnar cache for sub-second queries.', category: 'process' },
+            { id: '4', title: '4. Semantic Layer & DAX / LOD Measures', description: 'Define governed business metrics with DAX CALCULATE() and Tableau FIXED Level of Detail expressions.', category: 'process' },
+            { id: '5', title: '5. Executive Visual Layout & Latency Audit', description: 'Apply 5-second cognitive test, F-pattern layout, and ensure query rendering time is < 1.0 second.', category: 'decision' },
+            { id: '6', title: '6. Automated Refresh & Alert Dispatch', description: 'Publish certified reports with automated anomaly alerts dispatched to Slack and executive emails.', category: 'output' },
+          ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Modern dimensional data warehouse and BI architecture powering real-time executive cockpits.',
+          badge: 'BI Architecture',
+          diagramType: 'architecture',
+        },
         caseStudy: {
           title: 'Enterprise FinTech CFO Executive Cockpit',
           industry: 'Financial Services & Payments',
@@ -542,6 +976,24 @@ print(revenue_by_segment)`,
           },
         ],
         interactiveType: 'distributions',
+        flowchart: {
+          title: 'Bayesian Inference & Distribution Selection Flowchart',
+          description: 'Probabilistic updating loop and stochastic continuous/discrete distribution selection',
+          steps: [
+            { id: '1', title: '1. Prior Belief Formulation', description: 'Establish base rate prior probability P(A) from historical domain observations or uniform uninformative prior.', category: 'input' },
+            { id: '2', title: '2. Evidence Observation', description: 'Observe new stochastic signal, biomarker test result, or fraudulent login vector B.', category: 'input' },
+            { id: '3', title: '3. Likelihood & Total Marginal Probability', description: 'Compute conditional likelihood P(B|A) and calculate evidence denominator via Law of Total Probability.', category: 'process' },
+            { id: '4', title: '4. Bayes Posterior Calculation', description: 'Update belief via P(A|B) = [P(B|A) * P(A)] / P(B) to derive exact revised probability.', category: 'process' },
+            { id: '5', title: '5. Action Threshold Comparison', description: 'Evaluate whether updated posterior probability breaches risk tolerance or diagnostic cutoff.', category: 'decision' },
+            { id: '6', title: '6. Iterative Belief Update', description: 'Current posterior serves as the new informed prior for the next cycle of incoming evidence.', category: 'output' },
+          ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Mathematical probability distributions, Gaussian curves, and Bayesian inferential updating.',
+          badge: 'Stochastic Calculus',
+          diagramType: 'distribution',
+        },
         caseStudy: {
           title: 'False Positive Paradox in Rare Disease Screening & Fraud',
           industry: 'Healthcare Diagnostics & Cyber Fraud',
@@ -637,6 +1089,24 @@ print("P(k calls) for k=0..4:", probs[:5].round(3))`,
           },
         ],
         interactiveType: 'queuing',
+        flowchart: {
+          title: 'M/M/1 Server Capacity & Waiting Line Flowchart',
+          description: 'Capacity planning and queue stabilization workflow to prevent latency spikes',
+          steps: [
+            { id: '1', title: '1. Arrival Rate Measurement (λ)', description: 'Model incoming request transactions or customer arrivals as a Poisson process with mean rate λ.', category: 'input' },
+            { id: '2', title: '2. Service Capacity Estimation (μ)', description: 'Determine maximum throughput and mean execution duration per worker thread (1 / μ).', category: 'input' },
+            { id: '3', title: '3. Stability Condition Check (ρ < 1.0)', description: 'Verify traffic intensity ρ = λ / μ. If ρ ≥ 1, queue grows without bound and rejects traffic.', category: 'decision' },
+            { id: '4', title: '4. Littles Law Queue Metrics', description: 'Compute expected queue length L_q = ρ^2 / (1 - ρ) and total system dwell latency W = 1 / (μ - λ).', category: 'process' },
+            { id: '5', title: '5. SLA Latency Violation Audit', description: 'Determine if 95th/99th percentile wait times exceed user experience service-level agreements.', category: 'decision' },
+            { id: '6', title: '6. Multi-Server Scaling (M/M/c)', description: 'Trigger horizontal container auto-scaling to distribute load across c parallel worker instances.', category: 'output' },
+          ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Cloud server cluster, connection pool buffers, and high-throughput queuing infrastructure.',
+          badge: 'Server Architecture',
+          diagramType: 'architecture',
+        },
         caseStudy: {
           title: 'Cloud Database Connection Pooling & Latency Spikes',
           industry: 'Cloud Infrastructure & SaaS',
@@ -746,6 +1216,24 @@ print(mm1_metrics(arrival_rate_lambda=80, service_rate_mu=100))`,
           },
         ],
         interactiveType: 'confusion-matrix',
+        flowchart: {
+          title: 'Classification Model Diagnostic & Threshold Calibration Flowchart',
+          description: 'Lifecycle of model evaluation balancing precision, recall, and asymmetric business costs',
+          steps: [
+            { id: '1', title: '1. Model Probability Inference', description: 'Generate continuous probability predictions p_i in [0, 1] for all test instances.', category: 'input' },
+            { id: '2', title: '2. Baseline Confusion Matrix (0.50)', description: 'Tabulate True Positives, False Positives, True Negatives, and False Negatives at default 0.50 cutoff.', category: 'process' },
+            { id: '3', title: '3. Error Cost Asymmetry Audit', description: 'Assess business cost of False Negative (e.g. missed cancer/fraud) vs False Positive (false alarm).', category: 'decision' },
+            { id: '4', title: '4. PR / ROC Curve Threshold Calibration', description: 'Sweep threshold τ from 0 to 1; identify optimal cutoff maximizing F1-score or target Recall.', category: 'process' },
+            { id: '5', title: '5. Probability Calibration (Brier / Reliability)', description: 'Validate Platt scaling or Isotonic regression to ensure model probabilities reflect true empirical odds.', category: 'decision' },
+            { id: '6', title: '6. Production Monitoring & Drift Alerts', description: 'Monitor Population Stability Index (PSI) and live Precision degradation against test baseline.', category: 'output' },
+          ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Classification confusion matrix, ROC-AUC space, and probability decision boundaries.',
+          badge: 'Model Diagnostics',
+          diagramType: 'matrix',
+        },
         caseStudy: {
           title: 'Subscription Churn Prediction at Netflix',
           industry: 'Video Streaming & SaaS',
@@ -829,6 +1317,24 @@ print(classification_report(y_true, y_pred, target_names=['Retained', 'Churn']))
           },
         ],
         interactiveType: 'decision-tree',
+        flowchart: {
+          title: 'PCA & Random Forest Ensemble Architecture Flowchart',
+          description: 'Dimensionality reduction followed by bootstrapped decision tree ensemble pipeline',
+          steps: [
+            { id: '1', title: '1. Standardization & Centering', description: 'Zero-center and scale continuous input matrix X to standardize feature variances.', category: 'input' },
+            { id: '2', title: '2. Covariance Eigendecomposition', description: 'Compute covariance matrix Σ = (1/(n-1)) X^T X and solve for orthogonal eigenvectors and eigenvalues.', category: 'process' },
+            { id: '3', title: '3. Scree Plot Variance Selection', description: 'Select top k principal components retaining ≥90-95% of cumulative explained variance.', category: 'decision' },
+            { id: '4', title: '4. Bootstrap Aggregation (Bagging)', description: 'Draw B random subsets with replacement; select random subset of features per split.', category: 'process' },
+            { id: '5', title: '5. Parallel Decision Tree Growth', description: 'Train B de-correlated CART trees splitting on Gini Impurity or Information Gain until stopping criteria.', category: 'process' },
+            { id: '6', title: '6. Majority Vote & Out-of-Bag Score', description: 'Ensemble individual tree predictions via majority vote and calculate Out-of-Bag generalized error.', category: 'output' },
+          ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Orthogonal principal component rotation and recursive decision tree branching topology.',
+          badge: 'Ensemble Learning',
+          diagramType: 'matrix',
+        },
         caseStudy: {
           title: 'High-Dimensional Credit Risk Scoring & Fraud Feature Reduction',
           industry: 'Banking & Fintech',
@@ -931,6 +1437,24 @@ pipeline = Pipeline([
           },
         ],
         interactiveType: 'timeseries-decomp',
+        flowchart: {
+          title: 'Box-Jenkins ARIMA/SARIMA Time Series Modeling Flowchart',
+          description: 'Iterative statistical procedure for stationarity transformation, model identification, and forecasting',
+          steps: [
+            { id: '1', title: '1. Stationarity Diagnostic (ADF Test)', description: 'Plot series and perform Augmented Dickey-Fuller unit root test (H0: non-stationary, p > 0.05).', category: 'decision' },
+            { id: '2', title: '2. Differencing Order d & D', description: 'Apply first differencing (1-B) or seasonal differencing (1-B^s) until mean and variance stabilize.', category: 'process' },
+            { id: '3', title: '3. ACF & PACF Order Identification', description: 'Inspect PACF cutoff for AR order p, and ACF cutoff for MA order q.', category: 'process' },
+            { id: '4', title: '4. Maximum Likelihood Parameter Estimation', description: 'Fit candidate SARIMA(p,d,q)(P,D,Q)s models; minimize Akaike Information Criterion (AIC).', category: 'process' },
+            { id: '5', title: '5. Residual Diagnostic & Ljung-Box Test', description: 'Verify model residuals are uncorrelated Gaussian White Noise (p > 0.05 in Ljung-Box).', category: 'decision' },
+            { id: '6', title: '6. Out-of-Sample Horizon Forecast', description: 'Generate multi-step point projections with expanding 95% confidence intervals.', category: 'output' },
+          ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Stochastic temporal oscillations, trend decomposition, and ARIMA lag modeling.',
+          badge: 'Time Series Modeling',
+          diagramType: 'flow',
+        },
         caseStudy: {
           title: 'Daily Electricity Grid Demand Forecasting',
           industry: 'Energy & Utilities',
@@ -1028,6 +1552,24 @@ forecast = results.get_forecast(steps=12).predicted_mean`,
           },
         ],
         interactiveType: 'lstm-cell',
+        flowchart: {
+          title: 'LSTM Recurrent Network & Prophet Forecasting Flowchart',
+          description: 'Deep sequential memory gating pipeline and generalized additive seasonality decomposition',
+          steps: [
+            { id: '1', title: '1. Sliding Window Tensor Construction', description: 'Transform 1D time series into 3D recurrent sliding lag tensor [samples, timesteps, features].', category: 'input' },
+            { id: '2', title: '2. Forget Gate Evaluation (f_t)', description: 'Sigmoid activation determines what portion of past long-term cell state C_{t-1} to discard.', category: 'process' },
+            { id: '3', title: '3. Input Gate & Candidate Memory (i_t, C~_t)', description: 'Sigmoid input gate and tanh layer synthesize new candidate information to record into cell state.', category: 'process' },
+            { id: '4', title: '4. Cell State Update (C_t)', description: 'Compute C_t = f_t * C_{t-1} + i_t * C~_t, updating the uninterrupted conveyor belt of memory.', category: 'process' },
+            { id: '5', title: '5. Output Gate & Hidden State (o_t, h_t)', description: 'Filter tanh(C_t) through sigmoid output gate to produce recurrent state vector h_t.', category: 'process' },
+            { id: '6', title: '6. Backtesting & Forecast Horizon', description: 'Generate forward forecasts, evaluate test WAPE, and ensemble with Prophet holiday regressors.', category: 'output' },
+          ],
+        },
+        visualDiagram: {
+          imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+          caption: 'Deep recurrent neural memory architectures, sequential vectors, and temporal gating states.',
+          badge: 'Deep Learning',
+          diagramType: 'architecture',
+        },
         caseStudy: {
           title: 'Retail Demand Forecasting across 5,000 SKUs',
           industry: 'Omnichannel Retail & E-Commerce',

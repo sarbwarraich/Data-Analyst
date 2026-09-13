@@ -34,10 +34,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
     const root = document.documentElement;
     if (theme === 'light') {
-      root.classList.add('theme-light');
+      root.classList.add('theme-light', 'light');
       root.classList.remove('dark');
     } else {
-      root.classList.remove('theme-light');
+      root.classList.remove('theme-light', 'light');
       root.classList.add('dark');
     }
   }, [theme]);

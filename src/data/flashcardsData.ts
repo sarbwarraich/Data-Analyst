@@ -1,7 +1,23 @@
 import { Flashcard } from '../types/curriculum';
 
 export const FLASHCARDS: Flashcard[] = [
-  // Subject 1: Data Analytics
+  // Subject 1: Data Analytics - Start of Course: Data Types
+  {
+    id: 'fc-dt-1',
+    subjectId: 'data-analytics',
+    topicTitle: 'Data Types (Structured, Semi-Structured, Unstructured)',
+    front: 'How do you define and differentiate Structured, Semi-Structured, and Unstructured data?',
+    back: '• Structured Data: High-level organized data adhering to a rigid, predefined schema stored in relational tables (rows × columns, e.g., PostgreSQL, Parquet).\n• Semi-Structured Data: Lacks a strict tabular schema but contains organizational markers, tags, or keys to separate data elements (e.g., JSON, XML, MongoDB).\n• Unstructured Data: No predefined structure, schema, or organization; exists in native raw binary or textual format (e.g., audio, video, natural text, sensor streams).',
+    tag: 'Data Types',
+  },
+  {
+    id: 'fc-dt-2',
+    subjectId: 'data-analytics',
+    topicTitle: 'Schema-on-Write vs Schema-on-Read',
+    front: 'What is the operational difference between Schema-on-Write and Schema-on-Read?',
+    back: '• Schema-on-Write (RDBMS/SQL): Schema is validated strictly before data is written to disk. Protects data integrity and prevents corrupt records, but requires ALTER TABLE migrations for evolving formats.\n• Schema-on-Read (Data Lakes / JSON): Data is ingested in raw form without upfront validation; structure and types are parsed and projected only when queries are executed.',
+    tag: 'Data Engineering',
+  },
   {
     id: 'fc-1',
     subjectId: 'data-analytics',

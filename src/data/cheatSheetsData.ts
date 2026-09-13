@@ -1,7 +1,20 @@
 import { CheatSheetEntry } from '../types/curriculum';
 
 export const CHEAT_SHEETS: CheatSheetEntry[] = [
-  // Subject 1: Data Analytics
+  // Subject 1: Data Analytics - Start of Course: Data Types
+  {
+    id: 'cs-dt-1',
+    subjectId: 'data-analytics',
+    category: 'Foundations & Data Types',
+    title: 'Data Types Typology: Structured vs Semi-Structured vs Unstructured',
+    formulaOrSyntax: 'H(X) = -\\sum P(x)\\log_2 P(x); \\quad \\cos(\\theta) = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{u}\\|\\|\\mathbf{v}\\|}',
+    description: '• Structured: Rigid predefined tabular schema (rows × cols); Schema-on-Write; SQL/RDBMS.\n• Semi-Structured: Tags, keys, markers (JSON/XML); Schema-on-Read; MongoDB/DynamoDB.\n• Unstructured: No schema (text, audio, video); Vector embeddings & deep neural encodings; S3 & Vector DBs.',
+    ruleOfThumb: 'Use RDBMS for ACID transactional financial ledgers; use JSON/document stores for rapid schema evolution; use Vector DBs with embeddings for semantic retrieval on unstructured text/media.',
+    pythonSnippet: `# Structured: pd.DataFrame with strict types
+# Semi-Structured: pd.json_normalize(json_data)
+# Unstructured: Cosine similarity on dense embedding vectors
+cosine_sim = np.dot(u, v) / (np.linalg.norm(u) * np.linalg.norm(v))`,
+  },
   {
     id: 'cs-1',
     subjectId: 'data-analytics',

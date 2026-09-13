@@ -1,6 +1,8 @@
 {
   "name": "Data Analyst M.Tech Self-Study Hub",
-  "description": "Interactive self-study platform for M.Tech Data Analyst curriculum featuring interactive animated diagrams, flowcharts, real-world case studies, Gemini AI personalized explanations & Q&A, cheat sheets, and flashcards.",
+  "description": "Interactive self-study platform for M.Tech Data Analyst curriculum featuring interactive animated diagrams, flowcharts, real-world case studies, Gemini AI personalized explanations & Q&A, structured printable PDF cheat sheets, and flashcards.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

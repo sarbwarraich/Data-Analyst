@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant light (&:where(.theme-light, .theme-light *));
+
 /* ==========================================================================
    HIGH-CONTRAST LIGHT MODE FOR DAYTIME STUDY
    ========================================================================== */
@@ -284,4 +286,77 @@
 }
 .theme-light ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* ==========================================================================
+   STRUCTURED PRINT STYLESHEET (OFFLINE CHEAT SHEET EXPORT)
+   ========================================================================== */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide app navigation, sidebars, headers, floating bars and modal chrome */
+  nav,
+  header,
+  aside,
+  .no-print,
+  button,
+  .sticky {
+    display: none !important;
+  }
+
+  /* Expand modal to full width with zero background shadows */
+  .fixed.inset-0 {
+    position: static !important;
+    display: block !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .max-w-5xl,
+  .max-h-\[92vh\] {
+    max-width: 100% !important;
+    max-height: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  #printable-topic-cheatsheet {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 12mm !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  /* Page break rules */
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .mb-6,
+  pre,
+  table,
+  .p-3,
+  .p-3\.5 {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Ensure colors and backgrounds are printed accurately */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 }

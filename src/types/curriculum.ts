@@ -46,6 +46,13 @@ export interface QuizQuestion {
   explanation: string;
 }
 
+export interface TopicVisual {
+  imageUrl: string;
+  caption: string;
+  badge: string;
+  diagramType?: 'architecture' | 'flow' | 'matrix' | 'distribution' | 'comparison';
+}
+
 export interface Topic {
   id: string;
   title: string;
@@ -66,8 +73,10 @@ export interface Topic {
     | 'queuing'
     | 'timeseries-decomp'
     | 'lstm-cell'
-    | 'decision-tree';
+    | 'decision-tree'
+    | 'data-types';
   flowchart?: Flowchart;
+  visualDiagram?: TopicVisual;
   caseStudy: CaseStudy;
   pythonSnippet: {
     title: string;
