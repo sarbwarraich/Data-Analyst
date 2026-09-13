@@ -1,0 +1,151 @@
+import { Flashcard } from '../types/curriculum';
+
+export const FLASHCARDS: Flashcard[] = [
+  // Subject 1: Data Analytics
+  {
+    id: 'fc-1',
+    subjectId: 'data-analytics',
+    topicTitle: 'Data Preprocessing',
+    front: 'What is the key difference between MCAR, MAR, and MNAR missing data mechanisms?',
+    back: '• MCAR (Missing Completely at Random): Missingness has zero relationship to any observed or unobserved variable (e.g., tube dropped in lab).\n• MAR (Missing at Random): Missingness relates to other observed variables, but not the missing value itself (e.g., men reporting depression less often, but known via gender column).\n• MNAR (Missing Not at Random): Missingness depends directly on the unobserved value itself (e.g., high earners refusing to report salary).',
+    tag: 'Imputation',
+  },
+  {
+    id: 'fc-2',
+    subjectId: 'data-analytics',
+    topicTitle: 'Feature Scaling',
+    front: 'When should you choose RobustScaler over StandardScaler or MinMaxScaler?',
+    back: 'Use RobustScaler when data contains significant outliers. StandardScaler uses mean and standard deviation (both heavily skewed by extreme values). RobustScaler uses the Median and Interquartile Range (IQR = Q3 - Q1), making it resistant to outliers.',
+    formula: 'x_{scaled} = (x - \\text{Median}) / \\text{IQR}',
+    tag: 'Preprocessing',
+  },
+  {
+    id: 'fc-3',
+    subjectId: 'data-analytics',
+    topicTitle: 'K-Means Clustering',
+    front: 'What does the Silhouette Coefficient measure, and what does a value near -1 indicate?',
+    back: 'Silhouette Coefficient s(i) = (b(i) - a(i)) / max(a(i), b(i)), where a(i) is intra-cluster distance and b(i) is nearest-cluster distance.\n• Near +1: Well matched to its cluster, far from neighbors.\n• Near 0: On the border between two clusters.\n• Near -1: Point is misclustered and closer to an adjacent cluster.',
+    formula: 's(i) = \\frac{b(i) - a(i)}{\\max(a(i), b(i))}',
+    tag: 'Clustering',
+  },
+  {
+    id: 'fc-4',
+    subjectId: 'data-analytics',
+    topicTitle: 'Hypothesis Testing',
+    front: 'Why should you use ANOVA instead of multiple two-sample t-tests when comparing 4 groups?',
+    back: 'Multiple pairwise t-tests cause Family-Wise Alpha Inflation. Comparing 4 groups requires 4C2 = 6 pairwise tests. If each test has α = 0.05, the cumulative probability of at least one false positive (Type I error) jumps to 1 - (1 - 0.05)^6 ≈ 26.5%! ANOVA controls this error rate in a single test.',
+    formula: '\\alpha_{cumulative} = 1 - (1 - \\alpha)^k',
+    tag: 'Inferential Stats',
+  },
+
+  // Subject 2: Data Visualization
+  {
+    id: 'fc-5',
+    subjectId: 'data-visualization',
+    topicTitle: 'Visual Perception',
+    front: 'What is Cleveland and McGills hierarchy of visual encodings from most accurate to least?',
+    back: '1. Position along a common scale (e.g. standard bar, dot plot)\n2. Position along non-aligned scales\n3. Length, direction, angle\n4. Area (e.g. bubble charts)\n5. Volume, curvature\n6. Color shading and color saturation (least accurate for quantitative decoding)',
+    tag: 'Encoding Hierarchy',
+  },
+  {
+    id: 'fc-6',
+    subjectId: 'data-visualization',
+    topicTitle: 'Business Intelligence & LOD',
+    front: 'In Tableau, what is the exact function of a FIXED Level of Detail (LOD) calculation?',
+    back: '{ FIXED [Dimension] : Aggregation([Measure]) } computes the aggregation using only the specified dimensions, completely bypassing any filters or dimensions present in the active worksheet visualization.',
+    formula: '\\{ \\text{FIXED } [\\text{Region}] : \\text{SUM}([\\text{Sales}]) \\}',
+    tag: 'Tableau & Power BI',
+  },
+  {
+    id: 'fc-7',
+    subjectId: 'data-visualization',
+    topicTitle: 'EDA Principles',
+    front: 'What is Simpson’s Paradox in Exploratory Data Analysis?',
+    back: 'A phenomenon where a trend or association appears in several groups of data, but disappears or reverses when the groups are aggregated together. Often caused by an unobserved confounding variable.',
+    tag: 'EDA',
+  },
+
+  // Subject 3: Probability, Statistics & Queuing Theory
+  {
+    id: 'fc-8',
+    subjectId: 'probability-statistics',
+    topicTitle: 'Bayes Theorem',
+    front: 'State Bayes’ Theorem formula and define each of its four components.',
+    back: 'P(A|B) = [ P(B|A) · P(A) ] / P(B)\n• P(A|B): Posterior (probability of hypothesis A after seeing evidence B)\n• P(B|A): Likelihood (probability of evidence B if hypothesis A is true)\n• P(A): Prior (initial belief about hypothesis A)\n• P(B): Marginal Likelihood / Evidence (normalizing constant)',
+    formula: 'P(A|B) = \\frac{P(B|A) \\cdot P(A)}{P(B)}',
+    tag: 'Probability',
+  },
+  {
+    id: 'fc-9',
+    subjectId: 'probability-statistics',
+    topicTitle: 'Queuing Theory',
+    front: 'What is Little’s Law and what condition is required for it to hold?',
+    back: 'L = λ · W\n• L: Average number of customers in the system\n• λ: Long-term average arrival rate\n• W: Average time a customer spends in the system\nIt holds for virtually any stable queuing system in steady state, regardless of arrival distribution or service time distribution!',
+    formula: 'L = \\lambda W',
+    tag: 'Operations Research',
+  },
+  {
+    id: 'fc-10',
+    subjectId: 'probability-statistics',
+    topicTitle: 'M/M/1 Stability',
+    front: 'What happens in an M/M/1 queue when traffic intensity ρ = λ / μ approaches or exceeds 1.0?',
+    back: 'When ρ ≥ 1, arrivals occur faster than the server can process them. The system is unstable and steady state does not exist. As ρ → 1 from below, the average queue length L = ρ / (1 - ρ) and wait time W = 1 / (μ - λ) asymptotically explode toward infinity.',
+    formula: 'L = \\frac{\\rho}{1 - \\rho}',
+    tag: 'Queuing Theory',
+  },
+
+  // Subject 4: Machine Learning
+  {
+    id: 'fc-11',
+    subjectId: 'machine-learning',
+    topicTitle: 'Model Evaluation',
+    front: 'When evaluating heavily imbalanced datasets (e.g. 0.05% fraud), why is PR-AUC preferred over ROC-AUC?',
+    back: 'ROC-AUC plots TPR vs FPR. FPR = FP / (FP + TN). When negative instances (TN) are in the millions, a huge absolute increase in False Positives (e.g. 10,000 extra false alarms) barely alters the FPR denominator, making the ROC curve look deceptively stellar. PR-AUC focuses on Precision = TP / (TP + FP), directly reflecting false alarm degradation.',
+    formula: '\\text{Precision} = \\frac{TP}{TP + FP}',
+    tag: 'Metrics',
+  },
+  {
+    id: 'fc-12',
+    subjectId: 'machine-learning',
+    topicTitle: 'Ensemble Methods',
+    front: 'How does Random Forest reduce model variance without increasing bias?',
+    back: 'By combining two randomizations:\n1. Bootstrap Aggregating (Bagging): Training trees on random replacement samples of size N.\n2. Random Subspace Method: Splitting each node using only a random subset of m ≈ √p features.\nThis decorrelates individual trees. Averaging B decorrelated trees reduces variance by a factor of ~ 1/B while preserving low individual tree bias.',
+    tag: 'Random Forest',
+  },
+  {
+    id: 'fc-13',
+    subjectId: 'machine-learning',
+    topicTitle: 'PCA',
+    front: 'What mathematical property links the eigenvalues of the covariance matrix to Principal Components?',
+    back: 'The eigenvectors of the sample covariance matrix Σ define the orthogonal directions of the principal axes. The corresponding eigenvalue λ_i equals the variance of the data projected onto that i-th principal component. The ratio λ_i / Σ(λ_k) gives the explained variance ratio.',
+    formula: '\\Sigma v_i = \\lambda_i v_i',
+    tag: 'Dimensionality Reduction',
+  },
+
+  // Subject 5: Time Series Analysis
+  {
+    id: 'fc-14',
+    subjectId: 'time-series',
+    topicTitle: 'Stationarity & Differencing',
+    front: 'What are the three strict conditions for Weak (Covariance) Stationarity?',
+    back: '1. Constant Mean: E[Y_t] = μ for all t (no trend).\n2. Constant Variance: Var(Y_t) = σ² for all t (homoscedasticity).\n3. Autocovariance depends only on lag k: Cov(Y_t, Y_{t-k}) = γ(k), not on actual time t.',
+    tag: 'Time Series',
+  },
+  {
+    id: 'fc-15',
+    subjectId: 'time-series',
+    topicTitle: 'ARIMA Identification',
+    front: 'How do you read ACF and PACF plots to identify an AR(p) vs MA(q) process?',
+    back: '• AR(p) process: PACF cuts off abruptly after lag p; ACF decays gradually (exponential decay or damped sine wave).\n• MA(q) process: ACF cuts off abruptly after lag q; PACF decays gradually.\n• ARMA(p, q): Both ACF and PACF decay gradually.',
+    tag: 'ARIMA',
+  },
+  {
+    id: 'fc-16',
+    subjectId: 'time-series',
+    topicTitle: 'LSTM Architecture',
+    front: 'What are the three main gates inside an LSTM cell and what are their specific duties?',
+    back: '1. Forget Gate (f_t): Decides what fraction of previous cell state C_{t-1} to discard (outputs 0 to 1 via sigmoid).\n2. Input Gate (i_t) & Candidate (C̃_t): Decides which new candidate values to write into cell state.\n3. Output Gate (o_t): Filters the updated cell state C_t via tanh to produce hidden state h_t for output and next step.',
+    formula: 'f_t = \\sigma(W_f [h_{t-1}, x_t] + b_f)',
+    tag: 'Deep Learning',
+  },
+];
